@@ -1,0 +1,18 @@
+name: Reset repo to clean state
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 0 * * SUN
+
+jobs:
+  reset:
+    name: Runner
+    runs-on: ubuntu-latest
+    steps:
+      - name: Reset dev branch to master
+        uses: nicksnell/action-reset-repo@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          reset_branch: main
+          base_branch: clean-state
